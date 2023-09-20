@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso</title>
+    <script>
+        var banco = [];
+        
+
+        banco.push({curso: 'Windows', 
+                    valor: "100,00", 
+                    });
+
+        banco.push({curso: 'Excel', 
+                    valor: "200,00", 
+                    });
+
+        banco.push({curso: 'Power BI', 
+                    valor: "300,00", 
+                    });
+                    
+    
+        listar();
+            
+
+        function listar(){
+            var saida = cabecalhoTabela();
+
+            for(var i=0; i < banco.length; i++) {
+                saida += inserirLinha(banco[i], i);       
+                console.log(banco[i]);
+            }
+
+            document.getElementById("tabela").innerHTML = saida;
+        }
+
+        function colunaAcoes(posicao){
+            var coluna = "<td>";
+            coluna += "<input type='button' value='Alterar'";
+            coluna += " onclick='editar(" + posicao + ")' />";
+            
+            coluna += "<input type='button' value='Excluir'";
+            coluna += " onclick='excluir(" + posicao + ")' />";
+
+            coluna += "</td>"; 
+            return coluna;   
+        }
+
+
+        
+
+        function editar(p){
+            indice = p;
+            document.getElementById("curso").value = banco[p].curso;
+            document.getElementById("valor").value = banco[p].valor;
+            
+
+            
+        }
+
+        function excluir(p){
+            var resposta = confirm("Deseja excluir?");
+            if (resposta == true){
+                banco.splice(p, 1);
+                listar();
+            }
+        }
+
+            document.getElementById("tabela").innerHTML = saida;
+        
+
+        function cabecalhoTabela(){
+            var str = "<tr>";
+            str += "<td>Curso</td>";
+            str += "<td>Valor</td>";
+            str += "<td>Ações</td>";
+            str += "</tr>";
+            
+            return str;
+        }
+
+        function inserirLinha(objeto, p){
+           var str = "<tr>"
+                str += "<td>" + objeto.curso + "</td>"; 
+                str += "<td>" + objeto.valor + "</td>";
+                str += colunaAcoes(p); 
+                str += "</tr>" 
+            return str;
+        }
+    </script>
+</head>
+<body onload="listar() ">
+    
+    <a href="cursos.html">Cursos</a>
+    <a href="turmas.html">Turmas</a>
+    <a href="alunos.html">Alunos</a>
+    <a href="professores.html">Professores</a>
+
+    <h1>Sistema Online</h1>
+
+    <input type="text" id="nome" placeholder="Nome" />
+    <input type="number" id="valor" placeholder="Valor" />
+    <input type="button" value="Ok" onclick="ok()">
+    <input type="button" value="Limpar" onclick="limpar()">
+    
+    </br>    </br>
+
+
+    <table id="tabela" border="1">
+
+
+    
+
+    </table>
+    <a href="cursos.html">VOLTAR</a>
+</body>
+</html>

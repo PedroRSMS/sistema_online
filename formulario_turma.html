@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turmas</title>
+    <script>
+        var banco = [];
+        
+
+        banco.push({nomeCurso: 'Curso 1', 
+                    dataInicio: "01/02/2023",
+                    dataTermino: "30/06/2023", 
+                    });
+
+        banco.push({nomeCurso: 'Curso 2', 
+                    dataInicio: "01/02/2023",
+                    dataTermino: "30/06/2023",
+                    });
+
+        banco.push({nomeCurso: 'Curso 3', 
+                    dataInicio: "01/02/2023",
+                    dataTermino:"30/06/2023",
+                    });
+                    
+    
+        listar();
+            
+
+        function listar(){
+            var saida = cabecalhoTabela();
+
+            for(var i=0; i < banco.length; i++) {
+                saida += inserirLinha(banco[i], i);       
+                console.log(banco[i]);
+            }
+
+            document.getElementById("tabela").innerHTML = saida;
+        }
+
+        function colunaAcoes(posicao){
+            var coluna = "<td>";
+            coluna += "<input type='button' value='Alterar'";
+            coluna += " onclick='editar(" + posicao + ")' />";
+            
+            coluna += "<input type='button' value='Excluir'";
+            coluna += " onclick='excluir(" + posicao + ")' />";
+
+            coluna += "</td>"; 
+            return coluna;   
+        }
+
+
+        
+
+        function editar(p){
+            indice = p;
+            document.getElementById("nomeCurso").value = banco[p].nomeCurso;
+            document.getElementById("dataInicio").value = banco[p].dataInicio;
+            document.getElementById("dataTermino").value = banco[p].dataTermino;
+            
+
+            
+        }
+
+        function excluir(p){
+            var resposta = confirm("Deseja excluir?");
+            if (resposta == true){
+                banco.splice(p, 1);
+                listar();
+            }
+        }
+
+            document.getElementById("tabela").innerHTML = saida;
+        
+
+        function cabecalhoTabela(){
+            var str = "<tr>";
+            str += "<td>Curso</td>";
+            str += "<td>Data Inicio </td>";
+            str += "<td>Data Termino </td>";
+            str += "<td>Ações</td>";
+            str += "</tr>";
+            
+            return str;
+        }
+
+        function inserirLinha(objeto, p){
+           var str = "<tr>"
+                str += "<td>" + objeto.nomeCurso + "</td>"; 
+                str += "<td>" + objeto.dataInicio + "</td>";
+                str += "<td>" + objeto.dataTermino + "</td>";
+                str += colunaAcoes(p); 
+                str += "</tr>" 
+            return str;
+        }
+    </script>
+</head>
+<body onload="listar() ">
+    
+    <a href="cursos.html">Cursos</a>
+    <a href="turmas.html">Turmas</a>
+    <a href="alunos.html">Alunos</a>
+    <a href="professores.html">Professores</a>
+
+    <h1>Sistema Online</h1>
+    <label>Selecione o curso:</label>
+    <select id="curso" name="escolhaCurso">
+        <option value="windows">Windows</option>
+        <option value="excel">Excel</option>
+        <option value="powerbi">Power BI</option>
+    </select>
+    <label>Data de início:</label>
+    <input type="date" id="dataInicio" />
+    <label>Data de término:</label>
+    <input type="date" id="dataTermino" />
+    <input type="button" value="Ok" onclick="ok()" />
+    <input type="button" value="Limpar" onclick="limpar()" />
+
+</br></br>
+
+
+    <table id="tabela" border="1">
+
+    </table>
+    <a href="turmas.html">VOLTAR</a>
+</body>
+</html>

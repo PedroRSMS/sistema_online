@@ -4,114 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professores</title>
-    <script>
-        var banco = [];
-        
-
-        banco.push({nome: 'Pedro ', 
-                    telefone: "21 91234-5678", 
-                    });
-
-        banco.push({nome: 'João', 
-                    telefone: "21 99876-5432",
-                    });
-
-        banco.push({nome: 'Thiago', 
-                    telefone:"21 99874-5632",
-                    });
-                    
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
     
-        listar();
-            
-
-        function listar(){
-            var saida = cabecalhoTabela();
-
-            for(var i=0; i < banco.length; i++) {
-                saida += inserirLinha(banco[i], i);       
-                console.log(banco[i]);
-            }
-
-            document.getElementById("tabela").innerHTML = saida;
-        }
-
-        function colunaAcoes(posicao){
-            var coluna = "<td>";
-            coluna += "<input type='button' value='Alterar'";
-            coluna += " onclick='editar(" + posicao + ")' />";
-            
-            coluna += "<input type='button' value='Excluir'";
-            coluna += " onclick='excluir(" + posicao + ")' />";
-
-            coluna += "</td>"; 
-            return coluna;   
-        }
-
-
-        
-
-        function editar(p){
-            indice = p;
-            document.getElementById("nome").value = banco[p].nome;
-            document.getElementById("telefone").value = banco[p].telefone;
-            
-
-            
-        }
-
-        function excluir(p){
-            var resposta = confirm("Deseja excluir?");
-            if (resposta == true){
-                banco.splice(p, 1);
-                listar();
-            }
-        }
-
-            document.getElementById("tabela").innerHTML = saida;
-        
-
-        function cabecalhoTabela(){
-            var str = "<tr>";
-            str += "<td>Nome</td>";
-            str += "<td>Telefone</td>";
-            str += "<td>Ações</td>";
-            str += "</tr>";
-            
-            return str;
-        }
-
-        function inserirLinha(objeto, p){
-           var str = "<tr>"
-                str += "<td>" + objeto.nome + "</td>";
-                str += "<td>" + objeto.telefone + "</td>";
-                str += colunaAcoes(p); 
-                str += "</tr>" 
-            return str;
-        }
-    </script>
 </head>
-<body onload="listar() ">
-    
-    <a href="cursos.html">Cursos</a>
-    <a href="turmas.html">Turmas</a>
-    <a href="alunos.html">Alunos</a>
-    <a href="professores.html">Professores</a>
+<body>
+
+    <a href="index.html">Sistema Online</a>
+    <a href="formulario_curso.html">Cursos</a>
+    <a href="formulario_turma.html">Turmas</a>
+    <a href="formulario_aluno.html">Alunos</a>
+    <a href="formulario_professor.html">Professores</a>
 
     <h1>Sistema Online</h1>
-<form>
-    <input type="text" id="nome" placeholder="Nome" />
-    <input type="email" id="email" placeholder="E-mail" />
-    <input type="text" id="telefone" placeholder="Telefone" />
-    <input type="button" value="Ok" onclick="ok()" />
-    <input type="button" value="Limpar" onclick="limpar()" />
-</form>
 
-</br></br>
+    <div class="container">
+        <form action="" method="get">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" name="nome"  
+                        required="true" maxlength="40" class="form-control" />
+            </div>  
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" name="email" 
+                        required="true" maxlength="30" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" id="telefone" name="telefone" 
+                        required="true" maxlength="11" class="form-control"/>
+            </div>
+            
+            <div class="mb-3">
+                <input type="submit" value="Ok" class="btn btn-success" />
+                <input type="reset" value="Limpar" class="btn btn-primary" />
+            </div>
+        </form>
     
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="titulo-coluna">Nome</th>
+                        <th class="titulo-coluna">Telefone</th>
+                        <th class="titulo-coluna">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pedro</td>
+                        <td>21 91234-5678</td>
+                        <td>
+                            <input type="submit" value="Alterar" class="btn btn-primary" />
+                            <input type="submit" value="Excluir" class="btn btn-secondary" />
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>João</td>
+                        <td>21 91234-5678</td>
+                        <td>
+                            <input type="submit" value="Alterar" class="btn btn-primary" />
+                            <input type="submit" value="Excluir" class="btn btn-secondary" />
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>Thiago</td>
+                        <td>21 91234-5678</td>
+                        <td>
+                            <input type="submit" value="Alterar" class="btn btn-primary" />
+                            <input type="submit" value="Excluir" class="btn btn-secondary" />
+                        </td>                        
+                    </tr>
+            </table>
+        </div>
 
-    <table id="tabela" border="1">
+        <a href="index.html">VOLTAR</a>
 
-    </table>
-    <a href="professores.html">VOLTAR</a>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </html>
